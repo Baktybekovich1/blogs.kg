@@ -1,0 +1,22 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container overflow-hidden margin">
+        <div class="row ">
+            <div class="col-md-20">
+                <div class="p-4 border bg-light">
+                    <div class="text text-center">
+                        <h1 class="h1">Page not found</h1>
+
+                        <p class="fs-3">
+                            У вас нет доступа на эту страницу!</p>
+                        <p class="fs-4">
+                            <a href="{{ url('index_autho') }}">Авторизация</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

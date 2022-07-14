@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<form method="post">
+    <input type="text" name="name" placeholder="Название"><br>
+    <input type="text" name="tag" placeholder="Тег"><br>
+    <p><textarea style=" height: 200px; width: 500px;" type="comment" name="text" placeholder="Text"></textarea></p>
+    <input type="text" name="author" placeholder="Автор">
+    <button type="submit">Сохранить</button>
+</form>
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

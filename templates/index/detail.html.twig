@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ blogs.nameShort }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container overflow-hidden margin">
+        <div class="row ">
+            <div class="col-md-20">
+                <div class="p-4 border bg-light">
+                    <div style="text-align: center">
+                        <h1>{{ blogs.name }}</h1>
+                        <h3>{{ blogs.tag }}</h3>
+                        <h6>{{ blogs.date }}  {{ blogs.time }}</h6>
+                        <div class="p-3 border bg-light">
+                            <h6>{{ blogs.text }}</h6></div>
+                    </div>
+                    <p style="text-align: right">
+                        Издано:{{ blogs.author }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container overflow-hidden">
+        <div class="row ">
+            <table class="table table-dark">
+                {% for comment in comments %}
+                <div class="col-md-8">
+
+                    <div class="col-10">
+                        <div class="p-3 border bg-light">
+
+                            <h3 class="d-inline-block mb-2 text-success">{{ comment.name }}</h3>
+
+                            <div class="mb-1 text-muted">{{ comment.createdAt | date('d.m.Y H:i:s') }} </div>
+                            <p class="mb-auto">{{ comment.text }}</p>
+                            {% for item in comment.children %}
+                            <div class="p-3 border bg-light">
+                                <strong class="d-inline-block mb-2 text-warning">{{ item.name }}</strong>
+
+                                <div class="mb-1 text-muted">
+                                    {{ item.createdAt | date('d.m.Y H:i:s') }}
+                                </div>
+                                <p class="mb-auto">{{ item.text }}</p>
+                            </div>
+                            {% endfor %}
+                            <div class="container overflow-hidden">
+                                <div class="row ">
+                                    <form method="post" action="{{ path('comCom') }}">
+                                        <input type="text" name="name" placeholder="ФИО"><br>
+                                        <p><textarea type="comment" name="text"
+                                                     placeholder="Text"></textarea></p>
+                                        <input type="hidden" name="idn" value="{{ comment.id }}">
+                                        <button type="submit">Сохранить</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+            </table>
+        </div>
+    </div><br>
+
+    <div class="container overflow-hidden">
+        <div class="row ">
+            <form method="post">
+                <input type="text" name="name" placeholder="ФИО"><br>
+                <p><textarea style=" height: 90px; width: 400px;" type="comment" name="text"
+                             placeholder="Text"></textarea></p>
+                <input type="hidden" name="inn" value="{{ blogs.id }}">
+                <button type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
