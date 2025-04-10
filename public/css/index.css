@@ -1,0 +1,15 @@
+.blogs {
+    width: 30%;
+
+}
+
+.out_blog {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+.border {
+    background: #c8bda2;
+    padding: 10px;
+
+}

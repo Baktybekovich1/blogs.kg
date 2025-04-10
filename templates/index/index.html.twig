@@ -1,29 +1,27 @@
 {% extends 'base.html.twig' %}
 {% block title %} Олайниии {% endblock %}
 {% block body %}
-    <div class="container overflow-hidden">
-        <div class="row ">
-            <table class="table table-dark">
-            {% for blog in blogs %}
-                <div class="col-md-6">
 
-                    <div class="col-10">
-                        <div class="p-3 border bg-light">
+<div class="out_blog">
+        {% for blog in blogs %}
+            <div class="blogs">
 
-                            <strong class="d-inline-block mb-2 text-success">{{ blog.author }}</strong>
-                            <h3 class="mb-0">{{ blog.name }}</h3>
-                            <div class="mb-1 text-muted">{{ blog.date }}  {{ blog.time }}</div>
-                            <p class="mb-auto">{{ blog.textShort }}</p>
-                            <a href="{{ url('index_detail',{id: blog.id})}}" >Continue reading</a>
-                            <a href="{{ url('index_delete',{id: blog.id})}}">Удалить</a>
-                        </div>
+                <div class="border">
+                    <div class="">
+
+                        <strong class="d-inline-block mb-2 text-success">{{ blog.author }}</strong>
+                        <h3 class="mb-0">{{ blog.name }}</h3>
+                        <div class="mb-1 text-muted">{{ blog.date }}  {{ blog.time }}</div>
+                        <p class="mb-auto">{{ blog.textShort }}</p>
+                        <a href="{{ url('index_detail',{id: blog.id}) }}">Continue reading</a>
+                        <a href="{{ url('index_delete',{id: blog.id}) }}">Удалить</a>
                     </div>
-
                 </div>
-            {% endfor %}
-            </table>
-        </div>
-    </div>
+
+            </div>
+        {% endfor %}
+</div>
+
 
 {% endblock %}
 

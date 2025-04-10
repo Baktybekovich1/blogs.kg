@@ -25,25 +25,6 @@ class IndexController extends AbstractController
      */
     public function index(BlogsRepository $blogsRepository): Response
     {
-//        $url = 'https://time.is/ru/';
-//        $client = HttpClient::create();
-//        $response = $client->request('GET', $url);
-//        $statusCode = $response->getStatusCode();
-//        if ($statusCode == '200') {
-//            $content = $response->getContent();
-//            $crawler = new Crawler($content);
-//            $links = $crawler->filter('.tpl-banner__main layout-grid layout-grid--sky tpl-banner__main--timepage')->each(function ($node) {
-//                $time = $node->filter('#ct')->text();
-//                return compact('time');
-//            });
-//            dd($links);
-//            foreach ($links as $link) {
-//                dd($link);
-//            }
-//            echo 'ad';
-//Всё для парсинга
-//        }
-
         $blogs = $blogsRepository->findAll();
 
         return $this->render('index/index.html.twig', ['blogs' => $blogs]);
@@ -69,8 +50,7 @@ class IndexController extends AbstractController
 
             }
             return $this->render('index/admin.html.twig');
-        }
-        else {
+        } else {
             return $this->redirect('/404');
         }
 
@@ -108,45 +88,7 @@ class IndexController extends AbstractController
             'time' => date("H:i:s")]);
     }
 
-    /**
-     * @Route ("/reg",name="index_reg")
-     * @return Response
-     */
-    public
-    function reg(Request $request, AdminRepository $adminRepository): Response
-    {
-        if ($request->getMethod() == Request::METHOD_POST) {
-            $admin = new Admin();
-            $admin->setLogin($request->request->get('login'));
-            $admin->setPassword($request->request->get('password'));
-            $adminRepository->add($admin, true);
-            return $this->redirect('/admin');
-        }
-        return $this->render('index/registration.html.twig');
-    }
 
-    /**
-     * @Route ("/authorisation",name="index_autho")
-     * @return Response
-     */
-    public
-    function auto(Request $request, AdminRepository $adminRepository): Response
-    {
-        $admin = $adminRepository->findAll();
-        if ($request->getMethod() == Request::METHOD_POST) {
-            foreach ($admin as $item) {
-                if ($item->getLogin() == $request->request->get('login') && $item->getPassword() == $request->request->get('password')) {
-                    $_SESSION['status'] = "admin";
-
-                    return $this->redirect('/admin');
-                } else {
-                    echo 'afaf';
-                }
-            }
-        }
-
-        return $this->render('index/authorisation.html.twig');
-    }
 
     /**
      * @Route ("/404",name="page404")
@@ -177,5 +119,6 @@ class IndexController extends AbstractController
         }
         return $this->render('index/com_comments.html.twig');
     }
+
 }
 
